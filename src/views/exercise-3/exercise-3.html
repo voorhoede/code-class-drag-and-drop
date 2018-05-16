@@ -1,0 +1,43 @@
+{% extends "views/_base/base.html" %}
+
+{% block navigation %}
+	<nav class="cc-navigation">
+		<a href="/" class="cc-back-link">← back to overview</a>
+		<a href="/exercise-3-solution" class="cc-answer-link">see answer →</a>
+	</nav>
+{% endblock %}
+
+{% block introduction %}
+	<h1>Exercise 3: File Drag and Drop</h1>
+
+	<p>Allow the user to drag a file into the drop target and display the name of the dropped file in the drop target.</p>
+{% endblock %}
+
+{% block html %}
+	<section class="cc-html-playground">
+        <div class="target" data-target>
+            Drop your files here!
+        </div>
+	</section>
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+
+    .target {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 280px;
+        width: 280px;
+        border: 2px solid currentColor;
+        border-radius: 4px;
+    }
+	</style>
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		
+	</script>
+{% endblock %}

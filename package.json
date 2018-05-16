@@ -1,0 +1,48 @@
+{
+  "name": "code-class-template",
+  "version": "1.0.0",
+  "description": "Templates for Code Classes at De Voorhoede",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf static/ && mkdirp static/",
+    "build": "run-s build:*",
+    "build:assets": "node scripts/copy-assets.js",
+    "build:css": "node scripts/build-css.js",
+    "build:html": "node scripts/build-html.js",
+    "build:js": "node scripts/build-js.js",
+    "prestart": "npm run build",
+    "start": "run-p start:server watch",
+    "start:server": "node index.js",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:assets": "chokidar 'src/assets/**/*' --command 'npm run build:assets'",
+    "watch:css": "chokidar 'src/**/*.less' --command 'npm run build:css'",
+    "watch:html": "chokidar 'src/**/*.html' --command 'npm run build:html'",
+    "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:voorhoede/code-class-template.git"
+  },
+  "author": "De Voorhoede",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.1",
+    "chokidar-cli": "^1.2.0",
+    "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.4.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-uglify": "^3.0.0",
+    "mkdirp": "^0.5.1",
+    "npm-run-all": "^4.1.2",
+    "nunjucks": "^3.0.1",
+    "rimraf": "^2.6.2"
+  }
+}

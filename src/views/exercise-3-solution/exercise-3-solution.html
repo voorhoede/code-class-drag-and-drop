@@ -1,0 +1,56 @@
+{% extends "views/_base/base.html" %}
+
+{% block navigation %}
+	<nav class="cc-navigation">
+        {# TODO: add link back to exercise #}
+		<a href="/exercise-3" class="cc-back-link">← back to exercise 3</a>
+	</nav>
+{% endblock %}
+
+{% block introduction %}
+    <h1>Exercise 3 - Answer</h1>
+{% endblock %}
+
+{% block html %}
+    <section class="cc-html-playground">
+        <div class="target" data-target>
+            Drop your files here!
+        </div>
+    </section>
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+
+        .target {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 280px;
+            width: 280px;
+            border: 2px solid currentColor;
+            border-radius: 4px;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+         
+        var target = document.querySelector('[data-target]');
+
+        target.addEventListener('dragover', function(event) {
+        event.preventDefault();
+        }, false);
+
+        target.addEventListener('drop', function(event) {
+        event.preventDefault(); // prevent file from being opened
+        var files = event.dataTransfer.files;
+
+        for (file of files) {
+            target.innerHTML = file.name;
+        }
+        }, false);
+
+    </script>
+{% endblock %}

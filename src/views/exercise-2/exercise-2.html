@@ -1,0 +1,113 @@
+{% extends "views/_base/base.html" %}
+
+{% block navigation %}
+	<nav class="cc-navigation">
+		<a href="/" class="cc-back-link">← back to overview</a>
+		<a href="/exercise-2-solution" class="cc-answer-link">see answer →</a>
+	</nav>
+{% endblock %}
+
+{% block introduction %}
+	<h1>Exercise 2: User feedback</h1>
+
+	<p>Improve the user experience by providing feedback to the user about the drop source and target.</p>
+{% endblock %}
+{% block html %}
+    <section class="cc-html-playground">
+        <ul id="fruits" class="fruits">
+            <li class="fruit" data-draggable draggable="true">Apple</li>
+            <li class="fruit" data-draggable draggable="true">Banana</li>
+            <li class="fruit" data-draggable draggable="true">Cherry</li>
+            <li class="fruit" data-draggable draggable="true">Grape</li>
+            <li class="fruit" data-draggable draggable="true">Kiwi</li>
+            <li class="fruit" data-draggable draggable="true">Melon</li>
+            <li class="fruit" data-draggable draggable="true">Orange</li>
+            <li class="fruit" data-draggable draggable="true">Pear</li>
+            <li class="fruit" data-draggable draggable="true">Strawberry</li>
+        </ul>
+
+        <ul data-target class="fruit-list"></ul>
+    </section>
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        :root {
+            --default-spacing: 1rem;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        [draggable] {
+            cursor: move;
+        }
+
+        .fruits {
+            margin-bottom: var(--default-spacing);
+        }
+
+        .fruit {
+            display: inline-block;
+            margin-bottom: calc(var(--default-spacing) / 2);
+            padding: var(--default-spacing);
+            background-color: #0cafcd;
+            border: 1px solid #009cba;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .fruit:not(:last-child) {
+            margin-right: calc(var(--default-spacing) / 2);
+        }
+
+        .fruit-list {
+            margin-bottom: var(--default-spacing);
+            min-height: 160px;
+            padding: calc(var(--default-spacing) / 2);
+            border: 2px solid currentColor;
+            border-radius: 4px;
+        }
+
+        .fruit-list .fruit {
+            background-color: #00b359;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+         
+        var draggables = document.querySelectorAll('[data-draggable]');
+        var target = document.querySelector('[data-target]');
+
+        for (draggable of draggables) {
+            draggable.addEventListener('dragstart', handleDragStart, false);
+        }
+
+        target.addEventListener('dragover', handleDragOver, false);
+        target.addEventListener('drop', handleDrop, false);
+
+        function handleDragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.innerText);
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var newItem = document.createElement('li');
+            newItem.innerHTML = event.dataTransfer.getData('text/plain');
+            newItem.classList.add('fruit');
+            target.appendChild(newItem);
+        }
+
+    </script>
+{% endblock %}
